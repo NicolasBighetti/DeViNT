@@ -1,0 +1,175 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head>
+	<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Prise en main de l'environnement DeViNT</title>
+	<meta name="GENERATOR" content="OpenOffice.org 3.2  (Win32)">
+	<meta name="CREATED" content="0;0">
+	<meta name="CHANGED" content="20130204;12415200">
+	<style type="text/css">
+	<!--
+		H3.ctl { font-family: "Mangal" }
+	-->
+	</style>
+</head>
+<body dir="LTR" lang="fr-FR">
+<h1>Projet DeViNT : découverte de l'atelier DeViNT</h1>
+<h2>Version janvier 2015</h2>
+
+<p align="JUSTIFY">Il s'agit dans cette première séance
+de découvrir les structures, principes et formats des
+applications DeViNT. Après quoi, vous serez capable d'utiliser
+les projets DeViNT existants afin de vous en inspirer, de les
+améliorer, et d'en inventer de nouveaux. 
+</p>
+
+<ol type="I">
+  <li><h3 class="western">Remarques préliminaires</h3>
+  <p style="margin-bottom: 0cm" align="JUSTIFY">Les déficients
+    visuels utilisent pour la plupart Windows. Cette première
+    séance de prise en main doit être faite <font color="#c5000b"><b>sous
+      Windows</b></font>. Par la suite, il est recommandé
+    d'utiliser windows; si vous décidez de passer sous linux,
+    vous devrez vous assurer que tout fonctionne correctement sous
+    windows avant la livraison de votre projet. 
+  </p>
+    
+  <p class="western" style="margin-top: 0cm; margin-bottom: 0cm" align="JUSTIFY">
+    <font size="3"><span style="font-weight: normal">Chaque année,
+      les projets les plus aboutis sont rassemblés et distribués aux enfants déficients visuels. Tous les projets se lancent à partir d'un unique menu.
+      Pour que votre projet puisse être
+      intégré au menu et distribué, il faut </span></font></font><font color="#c5000b"><font size="3"><b>impérativement</b></font></font> suivre
+    la structure que vous allez découvrir en manipulant l'atelier
+    DeViNT.</span></font></font></p>
+  <p class="western" style="margin-top: 0cm; margin-bottom: 0cm" align="JUSTIFY">&nbsp;</p>
+  </li>
+  
+  <li><h3 class="western"><strong>Création de votre répertoire
+    de projet</strong></h3>
+  <p>Ce répertoire sera utilisé pour rendre le sujet
+    dans sujet.html, d'ici la prochaine séance,
+    puis les spécifications, le scénario de la présentation
+  à Clément ADER, et enfin le bilan de cette
+    présentation. 
+  </p>
+  <ol>
+    <li>déclarez votre groupe de
+      projet (un groupe est composé de 3 à 4 élèves
+      dans le même groupe de TD, par exemple 'G1') 
+      </li><li>utilisez le numéro de
+        projet qui vous est alloué, mettons '1', pour créer un
+        répertoire nommé Projet1G1 dans le dossier :	</li>
+    <ul>
+      <li>/net/web/s/strombon/public/DEVINT2015
+        (chemin Unix)     
+        </li><li> \sfe\\web\s\strombon\public\DEVINT2015
+          (chemin Windows),    </li>
+      <li><strong>Attention, celui d'entre
+        vous qui crée le répertoire ProjetxxGy sera le seul à
+        pouvoir y écrire par la suite !!!</strong>
+        </li>
+      </ul>
+    <li>vérifiez que votre
+      répertoire est bien présent dans la page des projets 2015 où
+      un lien hypertexte Projet1G1/index.html est installé par d&eacute;faut.</li>
+  </ol>
+  </li>
+  
+  <li><h3 class="western">Installation de Java</h3>
+  <p>On installe Java  en ex&eacute;cutant le fichier jdk-8u31-windows-x64.exe  fourni dans l'AtelierDeViNT sur la cl&eacute; USB. </p>
+  <p>Il faut ensuite param&egrave;trer Eclipse de fa&ccedil;on &agrave; ce qu'il utilise le jdk install&eacute;. Pour ce faire, dans Preferences/Java/InstalledJRE, cliquer sur le bouton 'Search', indiquer le chemin du jdk install&eacute;, et cocher le jdk1.8 dans la liste affich&eacute;e.</p>
+  </li>
+  
+  <li><h3 class="western">Prise en main de l'atelier DeViNT</h3>
+  <p>Le projet Modele_de_jeu est un point de d&eacute;part pour les projets DeViNT, il ne contient pas de jeu, mais se conforme au format requis pour être distribué aux déficients visuels. D'autre part, Modele_de_jeu fournit des classes qui permettent de répondre aux principaux besoins pour s'adapter à des utilisateurs déficients visuels : utiliser la synth&egrave;se vocale SIVOX, jouer des sons wave, afficher des textes, des images, utiliser les &eacute;v&egrave;nements clavier, la souris, fournir des jeux de couleurs contrastés.</p>
+  <ol>
+    <li>
+      <p style="margin-bottom: 0cm"><strong>AtelierDeViNT :</strong>
+        cr&eacute;er un r&eacute;pertoire pour d&eacute;velopper vos projets, nomm&eacute; par exemple AtelierDeViNT, et recopier dans ce répertoire :</p>
+      <ul>
+        <li>Modele_de_jeu.zip</li>
+        <li>VocalyzeSIVOX.zip</li>
+        <li>descriptionAPIDevint.pdf</li>
+        <li>et premierTD.html, ce document</li>
+        </ul>
+      <br>
+      </li>
+    <li><strong>Installation de l'atelier DeViNT sous eclipse</strong> : d&eacute;compressez Modele_de_jeu.zip et VocalyseSIVOX.zip dans le r&eacute;pertoire AtelierDeViNT. Faire les r&eacute;glages suivants sous Eclipse :
+      <ul>
+        <li>cr&eacute;ez un projet Modele_de_jeu : pour cela faire New/Java Project, et d&eacute;cocher Use default location, afin de pointer vers le projet d&eacute;compress&eacute;</li>
+        <li>pr&eacute;cisez dans le menu Run/Run Configurations ... 
+          <ul>
+            <li>dans l'onglet Main, que le main est jeu.Lancementjeu</li>
+            <li>dans l'onglet Arguments, que le r&eacute;pertoire d'ex&eacute;cution est Modele_de_jeu/bin</li>
+            <li>dans le menu Files/Properties/Java build path, que l'archive VocalyzeSIVOX/bin/SI_VOX.jar est utilis&eacute;e par Modele_de_jeu</li>
+            <li>Important : v&eacute;rifiez que l'encodage utilis&eacute; par Eclipse est bien UTF-8, corriger sinon (voir dans Properties/Ressources/ dans le champ 'Text File Encoding').</li>
+            </ul>
+          </li>
+        <li><strong>Test final :</strong> Eclipse doit ex&eacute;cuter Modele_de_jeu qui utilise lui m&ecirc;me la synth&egrave;se vocale SIVOX</li>
+        <br>
+        </ul>
+      </li>
+    
+    <li><strong>Structure d'un projet
+      DeViNT :</strong> allez dans le répertoire Modele_de_jeu, 
+      <ul>
+        <li><b>bin</b> : contient les
+          exécutables, class et jars.
+          </li>
+        <li><b>src</b> : contient les
+          sources java               
+          </li>
+        <li><b>ressources</b> : contient les
+          ressources multim&eacute;dia et librairies n&eacute;cessaires &agrave; l'ex&eacute;cution de votre jeu et les param&egrave;tres de la synth&egrave;se vocale SIVOX :
+          <ul>
+            <li>les  r&eacute;pertoires sons/ et images/ contiennent les sons et les
+              images utilis&eacute;s par le code java</li>
+            <li>le r&eacute;pertoire lib/ contient les librairies dynamiques utiles, les jars externes, ... </li>
+            <li> le fichier si_vox_ihm.conf et le dossier mbrola contiennent des param&egrave;tres de la synthèse vocale</li>
+            </ul>
+          </li>
+        <li><b>doc</b> : contient les
+          fichiers qui décrivent votre projet. 
+        </li></ul>    
+      </li>
+    <br>
+    
+    <li><strong>Compréhension du code :</strong>
+      Modele_de_jeu contient deux packages : devintAPI et jeu. devintAPI contient des classes  que vous devez étendre pour créer votre jeu. Cette API est décrite <a href="./APIDevint.pdf">ici</a>. jeu contient des exemples de classes avec des cas d'utilisations utiles pour écrire un jeu (gestion des sons, des scores, ...). Ces classes sont décrites ici :
+      <ul>
+      <ol>
+        <li><i>jeu.Menu</i> : cette classe permet de gérer le menu de départ de votre jeu. Elle étend la classe <i>devintAPI.MenuAbstrait</i> </li>
+        <li><i>jeu.FenetreSimple</i> : cette classe étend <i>jeu.FenetreAbstraite</i>. Elle illustre le fonctionnement de base d'une fenêtre DeViNT : F1 = consigne, F2 = aide, F3 = gestion des couleurs, ESC : sortir de la fenêtre. </li>
+        <li><i>jeu.Jeu</i> : pourrait être la fenêtre de votre jeu, contient un bouton, du texte, associe une action à la touche F5. </li>
+        <li><i>jeu.GestionSon</i> : montre comment utiliser les sons. On peut lire des textes ou des fichiers wave enregistrés. Le son peut être interrompu ou pas selon les besoins. </li>
+        <li><i>jeu.FichierScore</i> : montre comment écrire des scores dans un fichier et lire ce fichier avec la synthèse vocale.  </li>
+        <li><em>jeu.GestionImage</em> : montre comment ins&eacute;rer une image et choisir des   images de tailles diff&eacute;rentes quand on appuie sur F4. </li>
+        </ol> 
+    </ol>
+  </li>
+  <br>
+  <li>
+    <h3 class="western"><font color="#c5000b"><b>Application : travail &agrave; rendre lors de la prochaine s&eacute;ance et pour chaque groupe de projet</b></font></h3>
+    Vous devez ajouter une option au menu du jeu qui permette d'ouvrir une fenêtre dans laquelle un texte de votre choix (poême, chanson, blague) est affiché et lu par la synthèse vocale. 
+    Cette fenêtre doit aussi contenir un bouton, quand on appuie sur ce bouton, cela joue le son wave "Bonjour à tous". Les couleurs du texte et du bouton doivent réagir quand on tape F3. La taille des polices du texte doivent r&eacute;agir quand on tape F4.<br>
+    <strong>Indications : </strong>
+    <ol>
+      <li>vous devez modifier <em>jeu.Menu</em> en ajoutant une option (tableau dans la   m&eacute;thode <em>nomOptions())</em>, et en associant une action &agrave; cette option   (m&eacute;thode <em>lancerOptions(int i)</em>). </li>
+      <li>vous devez cr&eacute;er une fen&ecirc;tre de jeu en partant par exemple de   <em>jeu.FenetreSimple</em>. Cette fen&ecirc;tre de jeu sera associ&eacute;e &agrave; l'option que   vous venez d'ajouter. </li>
+      <li>pour g&eacute;rer les sons, regarder la classe <em>jeu.GestionSon</em></li>
+      <li>pour la r&eacute;agir aux touches de raccourci F3, F4, ... regarder dans   <em>jeu.Jeu</em> et dans <em>jeu.GestionImage </em></li><br>
+    </ol>
+  </li>
+  <li>
+    <h3>Consigne pour tester les projets DeViNT existants</h3>
+
+  <p> <strong>Il faut installer les projets DeViNT que vous testez dans un r&eacute;pertoire diff&eacute;rent</strong> de celui que vous utilisez pour d&eacute;velopper votre projet.<br>
+    Les projets   se trouvent sur le site <em>http://prdevint.polytech.unice.fr</em>/ dans l'onglet 'T&eacute;l&eacute;charger le CD DeViNT'. On proc&egrave;de en deux temps: chargement du noyau du CD avec l'installeur dans un premier temps, et chargement des  projets s&eacute;lectionn&eacute;s un par un suivant les instructions du site.
+    </p>
+  <p>&nbsp;</p>
+  </li>
+</ol>
+
+
+
+
+</body></html>
