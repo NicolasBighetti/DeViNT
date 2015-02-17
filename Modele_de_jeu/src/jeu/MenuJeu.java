@@ -23,7 +23,7 @@ public class MenuJeu extends MenuAbstrait {
      * vous pouvez définir autant d'options que vous voulez
      **/
 	protected String[] nomOptions() {
-		String[] noms = {"Fenêtre simple","Jeu","Gestion du son","Fichier des scores","Gestion d'image","Quitter"};
+		String[] noms = {"Fenêtre simple","Jeu","Gestion du son","Fichier des scores","Gestion d'image","Nouvelle option","Quitter"};
 		return noms;
 	}
 
@@ -37,7 +37,8 @@ public class MenuJeu extends MenuAbstrait {
 		case 2 : new GestionSon("Gestion du son");break;
 		case 3 : new FichierScore("Ecriture dans un fichier");break;
 		case 4 : new GestionImage("Exemple d'image");break;
-		case 5 : System.exit(0);
+		case 5 : new FenetreTest("Fenetre de démo"); break;
+		case 6 : System.exit(0);
 		default: System.err.println("action non définie");
 		}
 	} 
