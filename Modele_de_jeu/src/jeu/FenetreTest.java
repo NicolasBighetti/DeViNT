@@ -14,6 +14,7 @@ import javax.swing.JTextField;
 
 import devintAPI.FenetreAbstraite;
 
+@SuppressWarnings("serial")
 public class FenetreTest extends FenetreAbstraite implements ActionListener{
 
 	private JLabel labelT;

@@ -33,6 +33,7 @@ public abstract class FenetreAbstraite extends  DevintFrameListener{
     	// a le focus
     	this.requestFocus();
 		voix.playWav(wavAccueil());
+		
     }
 
     /** méthode abstraite à implémenter 

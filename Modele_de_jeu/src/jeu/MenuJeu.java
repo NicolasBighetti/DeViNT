@@ -8,6 +8,7 @@
 
 package jeu; 
 
+import musiquizz.MultiPlayerView;
 import devintAPI.MenuAbstrait;
 
 public class MenuJeu extends MenuAbstrait {
@@ -23,7 +24,7 @@ public class MenuJeu extends MenuAbstrait {
      * vous pouvez définir autant d'options que vous voulez
      **/
 	protected String[] nomOptions() {
-		String[] noms = {"Fenêtre simple","Jeu","Gestion du son","Fichier des scores","Gestion d'image","Nouvelle option","Quitter"};
+		String[] noms = {"SOLO","MULTIJOUEUR","MEILLEURS SCORES","Quitter"};
 		return noms;
 	}
 
@@ -33,12 +34,9 @@ public class MenuJeu extends MenuAbstrait {
 	protected void lancerOption(int i) {
 		switch (i){  
 		case 0 : new FenetreSimple("Fenêtre simple");break;
-		case 1 : new Jeu(nomJeu);break;
+		case 1 : new MultiPlayerView("Musi'quizz Multiplayer");break;
 		case 2 : new GestionSon("Gestion du son");break;
-		case 3 : new FichierScore("Ecriture dans un fichier");break;
-		case 4 : new GestionImage("Exemple d'image");break;
-		case 5 : new FenetreTest("Fenetre de démo"); break;
-		case 6 : System.exit(0);
+		case 3 : System.exit(0);
 		default: System.err.println("action non définie");
 		}
 	} 
@@ -46,7 +44,7 @@ public class MenuJeu extends MenuAbstrait {
 	// renvoie le fichier wave contenant le message d'accueil
 	// ces fichiers doivent être placés dans ressources/sons/
 	protected  String wavAccueil() {
-		return "../ressources/sons/accueil.wav";
+		return "";
 	}
 
 	// renvoie le fichier wave contenant la règle du jeu
