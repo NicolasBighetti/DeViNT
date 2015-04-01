@@ -6,11 +6,9 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
-import javax.media.NoPlayerException;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
@@ -18,7 +16,7 @@ import javax.swing.JProgressBar;
 import javax.swing.SwingConstants;
 
 import util.MP3Gatherer;
-import util.MP3Player;
+import util.MyMP3Player;
 import devintAPI.FenetreAbstraite;
 
 /**
@@ -51,7 +49,7 @@ public class MultiPlayerGame extends FenetreAbstraite implements ActionListener{
 
 	private JButton anwserButton;
 
-	private MP3Player mp3player;
+	private MyMP3Player mp3player;
 
 	private List<String> mp3Path;
 
@@ -92,13 +90,12 @@ public class MultiPlayerGame extends FenetreAbstraite implements ActionListener{
 		anwserButton.setActionCommand("OK");
 		anwserButton.addActionListener(this);
 
-
-		MP3Gatherer g = new MP3Gatherer("C:/users/user/music/");
+		MP3Gatherer g = new MP3Gatherer("../ressources/musique/");
 		g.gatherMP3();
 		mp3Path = g.getMp3Path();
 		setNewRandomSong();
 		startThread();
-		//mp3player.play();
+		mp3player.play();
 
 		answerWheel = new JComboBox<String>(g.getMp3Name().toArray(new String[0]));
 		answerWheel.setFont(new Font(Font.DIALOG, 1, 35));
@@ -121,7 +118,7 @@ public class MultiPlayerGame extends FenetreAbstraite implements ActionListener{
 		if(isABuzzer(e.getKeyCode()))
 		{
 			cdt.stop();
-			//mp3player.pause();
+			mp3player.pause();
 
 			if(joueur1.getPlayer().getBuzzerKey() == e.getKeyCode())
 				activePlayer = joueur1.getPlayer();
@@ -212,7 +209,8 @@ public class MultiPlayerGame extends FenetreAbstraite implements ActionListener{
 			{
 				activePlayer = null;
 				cdt.resume();
-				//mp3player.unpause();
+				if(mp3player.getMp().isPaused())
+					mp3player.unpause();
 			}
 		}
 
@@ -234,10 +232,11 @@ public class MultiPlayerGame extends FenetreAbstraite implements ActionListener{
 			joueur4.getPlayer().setReactionTime(joueur4.getPlayer().getReactionTime() + 30000);
 
 		timer.setValue(300);
+		mp3player.stop();
 		setNewRandomSong();
 		cdt.setTempsMS(30000);
 		cdt.resume();
-		//mp3player.play();
+		mp3player.play();
 	}
 
 	/**
@@ -247,13 +246,14 @@ public class MultiPlayerGame extends FenetreAbstraite implements ActionListener{
 	public void hardReset()
 	{
 		addOneTotalQuestion();
-
-
+		
+		mp3player.stop();
 		timer.setValue(300);
 		setNewRandomSong();
-		//mp3player.play();
+		mp3player.play();
 		startThread();
 	}
+	
 	private void addOneTotalQuestion() {
 		joueur1.getPlayer().setTotalQuestions(joueur1.getPlayer().getTotalQuestions()+1);
 		joueur2.getPlayer().setTotalQuestions(joueur2.getPlayer().getTotalQuestions()+1);
@@ -269,13 +269,9 @@ public class MultiPlayerGame extends FenetreAbstraite implements ActionListener{
 	private void setNewRandomSong()
 	{
 		Collections.shuffle(mp3Path);
-		try {
-			mp3player = new MP3Player(mp3Path.iterator().next());
-			System.out.println(mp3player.getTitle());
-		} catch (NoPlayerException | IOException e) {
-			// TODO Auto-generated catch block
-			setNewRandomSong();
-		}
+		
+		mp3player = new MyMP3Player(mp3Path.iterator().next());
+		System.out.println(mp3player.getTitle());
 	}
 
 	/**
@@ -438,14 +434,14 @@ public class MultiPlayerGame extends FenetreAbstraite implements ActionListener{
 	/**
 	 * @return the mp3player
 	 */
-	public MP3Player getMp3player() {
+	public MyMP3Player getMp3player() {
 		return mp3player;
 	}
 
 	/**
 	 * @param mp3player the mp3player to set
 	 */
-	public void setMp3player(MP3Player mp3player) {
+	public void setMp3player(MyMP3Player mp3player) {
 		this.mp3player = mp3player;
 	}
 
