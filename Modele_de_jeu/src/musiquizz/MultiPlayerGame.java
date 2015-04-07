@@ -121,15 +121,40 @@ public class MultiPlayerGame extends FenetreAbstraite implements ActionListener{
 			mp3player.pause();
 
 			if(joueur1.getPlayer().getBuzzerKey() == e.getKeyCode())
+			{
 				activePlayer = joueur1.getPlayer();
+				voix.playText("Joueur 1, choisii ta réponseu");
+				openAnswerWindow();
+			}
 			else if(joueur2.getPlayer().getBuzzerKey() == e.getKeyCode())
+			{
 				activePlayer = joueur2.getPlayer();
+				voix.playText("Joueur 2, choisii ta réponseu");
+				openAnswerWindow();
+			}
 			else if(joueur3.getPlayer().getBuzzerKey() == e.getKeyCode())
+			{
 				activePlayer = joueur3.getPlayer();
+				voix.playText("Joueur 3, choisii ta réponseu");
+				openAnswerWindow();
+			}
 			else
+			{
 				activePlayer = joueur4.getPlayer();
+				voix.playText("Joueur 4, choisii ta réponseu");
+				openAnswerWindow();
+			}
 
 		}
+	}
+
+	
+	/**
+	 * Open a window of the type of the Devint menu windows that allows easy selection of the answer
+	 */
+	private void openAnswerWindow() {
+		// TODO Auto-generated method stub
+		
 	}
 
 	private boolean isABuzzer(int keyCode) {
