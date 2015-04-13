@@ -8,6 +8,8 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import devintAPI.FenetreAbstraite;
 
@@ -17,7 +19,7 @@ import devintAPI.FenetreAbstraite;
  *
  */
 @SuppressWarnings("serial")
-public class MultiPlayerView extends FenetreAbstraite implements ActionListener{
+public class MultiPlayerView extends FenetreAbstraite implements ActionListener, ListSelectionListener{
 
 	private JButton commencer;
 
@@ -162,9 +164,14 @@ public class MultiPlayerView extends FenetreAbstraite implements ActionListener{
 					joueur3.refreshPanel();
 					voix.playText("Joueure "+currentPlayer+", choisis ta toucheuh beuzeure");
 				}
+				else
+					joueur3.setPlayer(null);
 			}
 			else
+			{
 				voix.playText("Choisis une autreuh toucheuh");
+				joueur3.setPlayer(null);
+			}
 			break;
 		case 4:
 			if(bindKey(joueur4, e))
@@ -175,9 +182,14 @@ public class MultiPlayerView extends FenetreAbstraite implements ActionListener{
 					joueur4.getProfilList().setEnabled(false);
 					joueur4.refreshPanel();
 				}
+				else
+					joueur4.setPlayer(null);
 			}
 			else
+			{
+				joueur4.setPlayer(null);
 				voix.playText("Choisis une autreuh toucheuh");
+			}
 			break;
 		}
 		
@@ -235,6 +247,12 @@ public class MultiPlayerView extends FenetreAbstraite implements ActionListener{
 		p.setPlayer(new Player(key));
 		p.setWaitingBuzzer(false);
 		return true;
+	}
+
+	@Override
+	public void valueChanged(ListSelectionEvent arg0) {
+		// TODO Auto-generated method stub
+		requestFocusInWindow();
 	}
 
 }

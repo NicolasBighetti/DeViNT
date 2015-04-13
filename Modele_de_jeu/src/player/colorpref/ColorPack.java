@@ -50,8 +50,10 @@ public class ColorPack {
 		switch(deficiency)
 		{
 		
-			default:
-			case COLORBLIND : return new ColorPack(Color.GREEN, Color.BLACK, 25);
+			default:return new ColorPack(new Color(155, 215, 202), Color.BLACK, 25);
+//			case PROFIL2 : return new ColorPack(new Color(155, 215, 202), Color.BLACK, 25);
+//			case COLORBLIND : return new ColorPack(Color.WHITE, Color.BLACK, 25);
+//			case PROFIL3 : return new ColorPack(new Color(221, 138, 68), Color.BLACK, 25);
 			
 		}
 	}
@@ -64,6 +66,9 @@ public class ColorPack {
 	{
 		List<ColorDeficiency> list = new ArrayList<ColorDeficiency>();
 		list.add(ColorDeficiency.COLORBLIND);
+		list.add(ColorDeficiency.PROFIL2);
+		list.add(ColorDeficiency.PROFIL3);
+
 		
 		return list;
 	}

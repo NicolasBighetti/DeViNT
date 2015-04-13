@@ -2,7 +2,7 @@ package player.colorpref;
 
 public enum ColorDeficiency {
 
-	COLORBLIND("Daltonien");
+	COLORBLIND("Profil 1"), PROFIL2("Profil 2"), PROFIL3("Profil 3");
 	
 	
 	private String intitule;

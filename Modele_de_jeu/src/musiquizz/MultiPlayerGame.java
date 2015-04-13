@@ -1,16 +1,17 @@
 package musiquizz;
 
 
-import java.awt.Font;
+import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
-import javax.swing.JButton;
-import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.SwingConstants;
@@ -43,17 +44,17 @@ public class MultiPlayerGame extends FenetreAbstraite implements ActionListener{
 
 	private JPanel playerContainer;
 
-	private JComboBox<String> answerWheel;
-
 	private JProgressBar timer;
-
-	private JButton anwserButton;
 
 	private MyMP3Player mp3player;
 
 	private List<String> mp3Path;
 
 	private CountDownThread cdt;
+	
+	private String selectedAnswer = "";
+	
+	private MenuAnswer pc;
 
 	public MultiPlayerGame(String title) {
 		super(title);
@@ -63,33 +64,44 @@ public class MultiPlayerGame extends FenetreAbstraite implements ActionListener{
 	@Override
 	protected void init() {
 		// TODO Auto-generated method stub
-		playerContainer = new JPanel(new GridLayout(2,2));
+		playerContainer = new JPanel(new GridLayout(4,1));
 
 		if(joueur1.getPlayer() != null)
+		{
 			playerContainer.add(joueur1);
+			joueur1.setBuzzer(new JLabel(String.valueOf(joueur1.getPlayer().getBuzzerKey())));
+			joueur1.refreshPanel();
+		}
 
 		if(joueur2.getPlayer() != null)
+		{
 			playerContainer.add(joueur2);
+			joueur2.setBuzzer(new JLabel(String.valueOf(joueur2.getPlayer().getBuzzerKey())));
+			joueur2.refreshPanel();
+		}
 
 		if(joueur3.getPlayer() != null)
+		{
 			playerContainer.add(joueur3);
+			joueur3.setBuzzer(new JLabel(String.valueOf(joueur3.getPlayer().getBuzzerKey())));
+			joueur3.refreshPanel();
+		}
 
 		if(joueur4.getPlayer() != null)
+		{
 			playerContainer.add(joueur4);
-
-		answerWheel = new JComboBox<String>();
-		answerWheel.setFont(new Font(Font.DIALOG, 1, 35));
-		answerWheel.setVisible(true);
+			joueur4.setBuzzer(new JLabel(String.valueOf(joueur4.getPlayer().getBuzzerKey())));
+			joueur4.refreshPanel();
+		}
 
 		timer = new JProgressBar(SwingConstants.HORIZONTAL,0,300);
 		timer.setValue(300);
 
 
-		anwserButton = new JButton("Valider");
-		anwserButton.setFont(new Font(Font.DIALOG, 1, 35));
-		anwserButton.setActionCommand("OK");
-		anwserButton.addActionListener(this);
-
+		this.add(playerContainer, BorderLayout.WEST);
+		this.add(timer, BorderLayout.SOUTH);
+		this.pack();
+		
 		MP3Gatherer g = new MP3Gatherer("../ressources/musique/");
 		g.gatherMP3();
 		mp3Path = g.getMp3Path();
@@ -97,24 +109,22 @@ public class MultiPlayerGame extends FenetreAbstraite implements ActionListener{
 		startThread();
 		mp3player.play();
 
-		answerWheel = new JComboBox<String>(g.getMp3Name().toArray(new String[0]));
-		answerWheel.setFont(new Font(Font.DIALOG, 1, 35));
-		answerWheel.setVisible(true);
-
-		this.setLayout(new GridLayout(4,1));
-		this.add(playerContainer);
-		this.add(answerWheel);
-		this.add(timer);
-		this.add(anwserButton);
+		
+	
+		
 
 		isAnswering = false;
-
+		
 	}
 
 
 	@Override
 	public void keyPressed(KeyEvent e) {
 		super.keyPressed(e);
+		pc.keyPressed(e);
+		if(isAnswering)
+			return;
+		
 		if(isABuzzer(e.getKeyCode()))
 		{
 			cdt.stop();
@@ -123,38 +133,49 @@ public class MultiPlayerGame extends FenetreAbstraite implements ActionListener{
 			if(joueur1.getPlayer().getBuzzerKey() == e.getKeyCode())
 			{
 				activePlayer = joueur1.getPlayer();
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				voix.playText("Joueur 1, choisii ta réponseu");
-				openAnswerWindow();
 			}
 			else if(joueur2.getPlayer().getBuzzerKey() == e.getKeyCode())
 			{
 				activePlayer = joueur2.getPlayer();
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				voix.playText("Joueur 2, choisii ta réponseu");
-				openAnswerWindow();
 			}
 			else if(joueur3.getPlayer().getBuzzerKey() == e.getKeyCode())
 			{
 				activePlayer = joueur3.getPlayer();
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				voix.playText("Joueur 3, choisii ta réponseu");
-				openAnswerWindow();
 			}
 			else
 			{
 				activePlayer = joueur4.getPlayer();
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				voix.playText("Joueur 4, choisii ta réponseu");
-				openAnswerWindow();
 			}
-
+			isAnswering =  true;
 		}
-	}
-
-	
-	/**
-	 * Open a window of the type of the Devint menu windows that allows easy selection of the answer
-	 */
-	private void openAnswerWindow() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	private boolean isABuzzer(int keyCode) {
@@ -176,12 +197,11 @@ public class MultiPlayerGame extends FenetreAbstraite implements ActionListener{
 		return false;
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent arg0) {
+	public void actionPerformedString(String title) {
 		// TODO Auto-generated method stub
-		if(arg0.getActionCommand().equals("OK"))
+		if(isAnswering)
 		{
-			if(answerWheel.getItemAt(answerWheel.getSelectedIndex()).equals(mp3player.getTitle()))
+			if(title.equals(mp3player.getTitle()))
 			{
 				activePlayer.setGoodAnswers(activePlayer.getGoodAnswers()+1);
 				addOneTotalQuestion();
@@ -228,7 +248,7 @@ public class MultiPlayerGame extends FenetreAbstraite implements ActionListener{
 				}
 
 				softReset();
-
+				isAnswering = false;
 			}
 			else
 			{
@@ -236,9 +256,9 @@ public class MultiPlayerGame extends FenetreAbstraite implements ActionListener{
 				cdt.resume();
 				if(mp3player.getMp().isPaused())
 					mp3player.unpause();
+				isAnswering = false;
 			}
-		}
-
+	}
 		this.requestFocus();
 	}
 
@@ -294,9 +314,32 @@ public class MultiPlayerGame extends FenetreAbstraite implements ActionListener{
 	private void setNewRandomSong()
 	{
 		Collections.shuffle(mp3Path);
+		List<String> reponse = new ArrayList<String>();
 		
-		mp3player = new MyMP3Player(mp3Path.iterator().next());
-		System.out.println(mp3player.getTitle());
+		Iterator<String> i = mp3Path.iterator();
+		mp3player = new MyMP3Player(i.next());
+		reponse.add(mp3player.getTitle());
+		for(int l = 0; l < 4; l++)
+		{
+			String mp3 = i.next();
+			reponse.add(mp3.substring(mp3.lastIndexOf("/")+1, mp3.indexOf(".mp3")));
+		}
+
+		Collections.shuffle(reponse);
+		pc.titre1 = reponse.get(0);
+		pc.titre2 = reponse.get(1);
+		pc.titre3 = reponse.get(2);
+		pc.titre4 = reponse.get(3);
+		pc.titre5 = reponse.get(4);
+		
+		
+		if(pc != null)
+			this.remove(pc);
+		
+		pc = new MenuAnswer("", voix, this);
+		this.add(pc, BorderLayout.CENTER);
+		
+		validate();
 	}
 
 	/**
@@ -398,19 +441,6 @@ public class MultiPlayerGame extends FenetreAbstraite implements ActionListener{
 		MultiPlayerGame.joueur4 = joueur4;
 	}
 
-	/**
-	 * @return the anwserWheel
-	 */
-	public JComboBox<String> getAnswerWheel() {
-		return answerWheel;
-	}
-
-	/**
-	 * @param anwserWheel the anwserWheel to set
-	 */
-	public void setAnswerWheel(JComboBox<String> answerWheel) {
-		this.answerWheel = answerWheel;
-	}
 
 	/**
 	 * @return the timer
@@ -425,22 +455,6 @@ public class MultiPlayerGame extends FenetreAbstraite implements ActionListener{
 	public void setTimer(JProgressBar timer) {
 		this.timer = timer;
 	}
-
-	/**
-	 * @return the anwserButton
-	 */
-	public JButton getAnwserButton() {
-		return anwserButton;
-	}
-
-	/**
-	 * @param anwserButton the anwserButton to set
-	 */
-	public void setAnwserButton(JButton anwserButton) {
-		this.anwserButton = anwserButton;
-	}
-
-
 
 	/**
 	 * @return the playerContainer
@@ -510,6 +524,12 @@ public class MultiPlayerGame extends FenetreAbstraite implements ActionListener{
 	 */
 	public void setAnswering(boolean isAnswering) {
 		this.isAnswering = isAnswering;
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

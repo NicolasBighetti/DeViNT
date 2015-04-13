@@ -55,10 +55,10 @@ public class PanelScore extends JPanel implements KeyListener{
 		if(player == null)
 			return;
 		
-		buzzer.setText("Appuye sur " + KeyEvent.getKeyText(player.getBuzzerKey())+ " pour buzzer!");
+		buzzer.setText(KeyEvent.getKeyText(player.getBuzzerKey()));
 		score.setText("Score : " + player.getGoodAnswers());
 		ColorPack p = ColorPack.getColorPack(profilList.getItemAt(profilList.getSelectedIndex()));
-		
+		this.profilList.setVisible(false);
 		this.setBackground(p.getBgColor());
 	}
 	
